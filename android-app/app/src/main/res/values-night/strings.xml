@@ -1,6 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PID Application</string>
-    <string name="mapbox_access_token">pk.eyJ1IjoiZG9zbWFnYWwiLCJhIjoiY2ttZGR1NW9qMmtlMTJ5bjZmMzg0dzgydCJ9.vURnTNgsjxJbvFOZcwRAxQ</string>
     <string name="user_location_permission_explanation">The application need to use your location.</string>
     <string name="user_location_permission_not_granted">User location permissions are not granted. Please, grant them to use the application.</string>
 </resources>
