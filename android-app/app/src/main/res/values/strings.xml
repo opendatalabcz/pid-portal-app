@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PID Application</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoiZG9zbWFnYWwiLCJhIjoiY2ttZGR1NW9qMmtlMTJ5bjZmMzg0dzgydCJ9.vURnTNgsjxJbvFOZcwRAxQ</string>
 </resources>
