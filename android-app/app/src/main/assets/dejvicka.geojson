@@ -1,0 +1,205 @@
+{
+    "features": [
+        {
+            "geometry": {
+                "coordinates": [
+                    14.39317,
+                    50.10047
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "level_id": null,
+                "location_type": 1,
+                "parent_station": null,
+                "platform_code": null,
+                "stop_id": "U321S1",
+                "stop_name": "Dejvická",
+                "wheelchair_boarding": 1,
+                "zone_id": "P"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    14.39317,
+                    50.10042
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "level_id": "U321L2",
+                "location_type": 0,
+                "parent_station": "U321S1",
+                "platform_code": "1",
+                "stop_id": "U321Z101P",
+                "stop_name": "Dejvická",
+                "wheelchair_boarding": 1,
+                "zone_id": "P"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    14.39316,
+                    50.10051
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "level_id": "U321L2",
+                "location_type": 0,
+                "parent_station": "U321S1",
+                "platform_code": "2",
+                "stop_id": "U321Z102P",
+                "stop_name": "Dejvická",
+                "wheelchair_boarding": 1,
+                "zone_id": "P"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    14.39213,
+                    50.10109
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "level_id": null,
+                "location_type": 0,
+                "parent_station": null,
+                "platform_code": "W",
+                "stop_id": "U321Z12P",
+                "stop_name": "Dejvická",
+                "wheelchair_boarding": 0,
+                "zone_id": "P"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    14.3941,
+                    50.10255
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "level_id": null,
+                "location_type": 0,
+                "parent_station": null,
+                "platform_code": "K",
+                "stop_id": "U321Z13P",
+                "stop_name": "Dejvická",
+                "wheelchair_boarding": 0,
+                "zone_id": "P"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    14.39341,
+                    50.1006
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "level_id": null,
+                "location_type": 0,
+                "parent_station": null,
+                "platform_code": "J",
+                "stop_id": "U321Z18",
+                "stop_name": "Dejvická",
+                "wheelchair_boarding": 0,
+                "zone_id": "0"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    14.39148,
+                    50.10033
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "level_id": null,
+                "location_type": 0,
+                "parent_station": null,
+                "platform_code": "A",
+                "stop_id": "U321Z1P",
+                "stop_name": "Dejvická",
+                "wheelchair_boarding": 1,
+                "zone_id": "P"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    14.39061,
+                    50.10037
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "level_id": null,
+                "location_type": 0,
+                "parent_station": null,
+                "platform_code": "B",
+                "stop_id": "U321Z2P",
+                "stop_name": "Dejvická",
+                "wheelchair_boarding": 1,
+                "zone_id": "P"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    14.3942,
+                    50.10086
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "level_id": null,
+                "location_type": 0,
+                "parent_station": null,
+                "platform_code": "V",
+                "stop_id": "U321Z5",
+                "stop_name": "Dejvická",
+                "wheelchair_boarding": 0,
+                "zone_id": "0"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    14.3942,
+                    50.10086
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "level_id": null,
+                "location_type": 0,
+                "parent_station": null,
+                "platform_code": "V",
+                "stop_id": "U321Z5P",
+                "stop_name": "Dejvická",
+                "wheelchair_boarding": 0,
+                "zone_id": "P"
+            },
+            "type": "Feature"
+        }
+    ],
+    "type": "FeatureCollection"
+}
