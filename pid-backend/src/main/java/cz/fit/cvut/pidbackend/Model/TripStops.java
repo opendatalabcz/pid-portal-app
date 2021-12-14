@@ -6,13 +6,15 @@ import java.sql.Timestamp;
 @Entity
 @Table
 public class TripStops {
-    @EmbeddedId
-    private TripStopsId id;
+    @Id
+    @GeneratedValue
+    private String id;
 
 //    @ManyToOne
 //    @JoinColumn(name = "trip_id", referencedColumnName = "uid")
 //    @MapsId
-//    private Trip trip;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Trip trips;
 
     @OneToOne
     @JoinColumn(name = "stop_id", referencedColumnName = "uid")
@@ -24,28 +26,28 @@ public class TripStops {
     public TripStops() {
     }
 
-    public TripStops(TripStopsId id, Trip trip, Stop stop, Timestamp arrival) {
+    public TripStops(String id, Trip trips, Stop stop, Timestamp arrival) {
         this.id = id;
-//        this.trip = trip;
+        this.trips = trips;
         this.stop = stop;
         this.arrival = arrival;
     }
 
-    public TripStopsId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(TripStopsId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-//    public Trip getTrip() {
-//        return trip;
-//    }
-//
-//    public void setTrip(Trip trip) {
-//        this.trip = trip;
-//    }
+    public Trip getTrips() {
+        return trips;
+    }
+
+    public void setTrips(Trip trip) {
+        this.trips = trip;
+    }
 
     public Stop getStop() {
         return stop;

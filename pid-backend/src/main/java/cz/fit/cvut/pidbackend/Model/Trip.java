@@ -1,6 +1,7 @@
 package cz.fit.cvut.pidbackend.Model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "trips")
@@ -17,10 +18,12 @@ public class Trip {
     @JoinColumn(name = "service_id", referencedColumnName = "uid", insertable = false, updatable = false)
     private Service service;
 
-
-    private TripStops tripStops;
-
-
+    @OneToMany(
+            mappedBy = "trips",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<TripStops> tripStops;
 
     @Column(name = "service_id")
     private String serviceId;

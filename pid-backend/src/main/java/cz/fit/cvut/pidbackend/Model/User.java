@@ -13,15 +13,24 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "username")
     private String username;
+    @Column(name = "email")
     private String email;
+    @Column(name = "password")
     private String password;
+    @Column(name = "role")
     private String role;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "favourite_trips")
+//    @OneToMany(mappedBy = "users")
     private Set<Trip> favouriteTrips;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "favourite_routes")
+//    @OneToMany(mappedBy = "users")
     private Set<Route> favouriteRoutes;
 
     public long getId() {
