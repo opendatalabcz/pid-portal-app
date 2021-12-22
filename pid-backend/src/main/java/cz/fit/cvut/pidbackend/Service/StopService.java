@@ -50,7 +50,7 @@ public class StopService {
     // is it needed?
 
     public Set<Trip> getTripsThroughStop(String stopId) {
-        Set<TripStops> tripStops = tripStopsRepo.findAllByStop_Id(stopId);
+        Set<TripStops> tripStops = tripStopsRepo.findAllById_StopId(stopId);
 
 
         return null;
@@ -83,12 +83,17 @@ public class StopService {
         return Optional.of(closestTrip);
     }
 
-    // TODO
-
     public Set<Route> getRoutesForStop(String stopId) {
-        Set<TripStops> tripStops = tripStopsRepo.findAllByStop_Id(stopId);
+        Set<TripStops> tripStops = tripStopsRepo.findAllById_StopId(stopId);
+        Set<Route> routes = new HashSet<>();
+        for(TripStops t: tripStops) {
+            Optional<Trip> trip = tripRepo.findById(t.getId().getTripId());
+            if (trip.isEmpty()) {
+                continue;
+            }
+            routes.add(trip.get().getRoute());
+        }
 
-
-        return new HashSet<>();
+        return routes;
     }
 }

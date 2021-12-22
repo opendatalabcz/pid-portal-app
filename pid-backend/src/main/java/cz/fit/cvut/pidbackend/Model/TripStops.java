@@ -1,24 +1,15 @@
 package cz.fit.cvut.pidbackend.Model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
 @Table
-public class TripStops {
-    @Id
-    @GeneratedValue
-    private String id;
+public class TripStops implements Serializable {
 
-//    @ManyToOne
-//    @JoinColumn(name = "trip_id", referencedColumnName = "uid")
-//    @MapsId
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Trip trips;
-
-    @OneToOne
-    @JoinColumn(name = "stop_id", referencedColumnName = "uid")
-    private Stop stop;
+    @EmbeddedId
+    private TripStopsId id;
 
     @Column(name = "arrival")
     private Timestamp arrival;
@@ -26,35 +17,17 @@ public class TripStops {
     public TripStops() {
     }
 
-    public TripStops(String id, Trip trips, Stop stop, Timestamp arrival) {
+    public TripStops(TripStopsId id, Timestamp arrival) {
         this.id = id;
-        this.trips = trips;
-        this.stop = stop;
         this.arrival = arrival;
     }
 
-    public String getId() {
+    public TripStopsId getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(TripStopsId id) {
         this.id = id;
-    }
-
-    public Trip getTrips() {
-        return trips;
-    }
-
-    public void setTrips(Trip trip) {
-        this.trips = trip;
-    }
-
-    public Stop getStop() {
-        return stop;
-    }
-
-    public void setStop(Stop stop) {
-        this.stop = stop;
     }
 
     public Timestamp getArrival() {

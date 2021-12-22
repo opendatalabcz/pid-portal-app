@@ -6,15 +6,17 @@ import java.util.Objects;
 
 @Embeddable
 public class TripStopsId implements Serializable {
+
     private String tripId;
-    private int ptSequence;
+    private String stopId;
+    private int index;
 
     public TripStopsId() {
     }
 
     public TripStopsId(String tripId, int ptSequence) {
         this.tripId = tripId;
-        this.ptSequence = ptSequence;
+        this.index = ptSequence;
     }
 
     public String getTripId() {
@@ -25,24 +27,19 @@ public class TripStopsId implements Serializable {
         this.tripId = tripId;
     }
 
-    public int getPtSequence() {
-        return ptSequence;
+    public String getStopId() {
+        return stopId;
     }
 
-    public void setPtSequence(int ptSequence) {
-        this.ptSequence = ptSequence;
+    public void setStopId(String stopId) {
+        this.stopId = stopId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TripStopsId that = (TripStopsId) o;
-        return ptSequence == that.ptSequence && tripId.equals(that.tripId);
+    public int getIndex() {
+        return index;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(tripId, ptSequence);
+    public void setIndex(int index) {
+        this.index = index;
     }
 }

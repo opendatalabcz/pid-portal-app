@@ -1,11 +1,9 @@
 package cz.fit.cvut.pidbackend.Repository;
 
-import cz.fit.cvut.pidbackend.Model.Point;
 import cz.fit.cvut.pidbackend.Model.Stop;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
 import java.util.Set;
 
 @Repository

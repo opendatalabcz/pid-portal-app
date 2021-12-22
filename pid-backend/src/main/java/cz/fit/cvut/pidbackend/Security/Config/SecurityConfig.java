@@ -52,15 +52,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers(HttpMethod.GET, "/api/v1/**").permitAll()
 //                .antMatchers("/api/v1/auth/**").permitAll()
                 .antMatchers("/h2-console").permitAll()
+                .antMatchers("/h2").permitAll()
 //                .antMatchers("/api/auth/signin").permitAll()
                 .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/user/**").authenticated()
+//                .antMatchers("/api/user/**").authenticated()
                 .antMatchers("/api/auth/list").permitAll()
                 .antMatchers("/api/test/**").permitAll()
                 //.antMatchers("/api/user/**").permitAll()
                 //.antMatchers("/api/user/**").hasAuthority("ROLE")
                 .anyRequest()
-                .authenticated();
+                        .permitAll();
+//                .authenticated();
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 

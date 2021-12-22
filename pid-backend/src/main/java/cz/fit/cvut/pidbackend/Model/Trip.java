@@ -18,15 +18,14 @@ public class Trip {
     @JoinColumn(name = "service_id", referencedColumnName = "uid", insertable = false, updatable = false)
     private Service service;
 
-    @OneToMany(
-            mappedBy = "trips",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private Set<TripStops> tripStops;
+//    @OneToMany(
+//            cascade = CascadeType.ALL,
+//            orphanRemoval = true
+//    )
+//    private Set<TripStops> tripStops;
 
-    @Column(name = "service_id")
-    private String serviceId;
+//    @Column(name = "service_id")
+//    private String serviceId;
     @Column(name = "shape_id")
     private String shapeId;
     @Column(name = "direction")
@@ -66,13 +65,13 @@ public class Trip {
         this.service = service;
     }
 
-    public String getServiceId() {
-        return serviceId;
-    }
-
-    public void setServiceId(String serviceId) {
-        this.serviceId = serviceId;
-    }
+//    public String getServiceId() {
+//        return serviceId;
+//    }
+//
+//    public void setServiceId(String serviceId) {
+//        this.serviceId = serviceId;
+//    }
 
     public String getShapeId() {
         return shapeId;

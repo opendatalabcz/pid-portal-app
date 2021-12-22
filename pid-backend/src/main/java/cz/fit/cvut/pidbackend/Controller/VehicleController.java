@@ -1,7 +1,5 @@
 package cz.fit.cvut.pidbackend.Controller;
 
-import cz.fit.cvut.pidbackend.Model.Point;
-import cz.fit.cvut.pidbackend.Model.Position;
 import cz.fit.cvut.pidbackend.Model.Vehicle;
 import cz.fit.cvut.pidbackend.Service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api/vehicle")

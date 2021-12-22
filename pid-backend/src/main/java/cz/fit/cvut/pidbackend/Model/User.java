@@ -25,15 +25,15 @@ public class User {
     private String role;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "favourite_trips")
+//    @JoinColumn(name = "favourite_trips")
 //    @OneToMany(mappedBy = "users")
     private Set<Trip> favouriteTrips;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "favourite_routes")
+//    @JoinColumn(name = "favourite_routes")
 //    @OneToMany(mappedBy = "users")
     private Set<Route> favouriteRoutes;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -79,5 +79,25 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Set<Trip> getFavouriteTrips() {
+        return favouriteTrips;
+    }
+
+    public void setFavouriteTrips(Set<Trip> favouriteTrips) {
+        this.favouriteTrips = favouriteTrips;
+    }
+
+    public Set<Route> getFavouriteRoutes() {
+        return favouriteRoutes;
+    }
+
+    public void setFavouriteRoutes(Set<Route> favouriteRoutes) {
+        this.favouriteRoutes = favouriteRoutes;
     }
 }

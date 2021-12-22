@@ -17,13 +17,14 @@ public class Route {
     private String longName;
     @Column(name = "short_name")
     private String shortName;
-    @Column(name = "\"desc\"")
+//    @Column(name = "\"desc\"")
+    @Column(name = "desc")
     private String desc;
     @Column(name = "agency")
     private String agency;
     @Column(name = "color")
     private String color;
-    @Column(name = "textColor")
+    @Column(name = "text_color")
     private String textColor;
     @Column(name = "type")
     private String type;
