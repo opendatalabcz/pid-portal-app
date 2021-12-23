@@ -1,10 +1,10 @@
 -- Users --
 insert into users (email, name, password, role, username)
-values ('email@mail.com', 'name', '$2a$10$dh2e/ujIGyCgCK0P9C9a4OvHEXwDxzk6LVFyEqH9zGeSkdk2MW0oS', 'USER', 'username');
+    values ('email@mail.com', 'name', '$2a$10$dh2e/ujIGyCgCK0P9C9a4OvHEXwDxzk6LVFyEqH9zGeSkdk2MW0oS', 'USER', 'username');
 
 -- Service --
 insert into services (uid, end_time, monday, tuesday, wednesday, thursday, friday, saturday, sunday, created_time, modified_time)
-values ('1111100-1', {ts '2012-09-17 18:47:52.69'}, true, true, true, true, true, true, true, {ts '2012-09-17 18:47:52.69'}, {ts '2012-09-17 18:47:52.69'});
+    values ('1111100-1', {ts '2012-09-17 18:47:52.69'}, true, true, true, true, true, true, true, {ts '2012-09-17 18:47:52.69'}, {ts '2012-09-17 18:47:52.69'});
 
 -- Stops --
 insert into stops (uid, name, lat, lon, zone_id, wheelchair, parent_station)
@@ -36,8 +36,8 @@ insert into trip_stops (trip_id, stop_id, index, arrival)
 
 -- FavouriteRoutes --
 insert into users_favourite_routes (user_id, favourite_routes_uid)
-values (1, 'L9');
+    values (1, 'L9');
 
 -- FavouriteTrips --
 insert into users_favourite_trips (user_id, favourite_trips_uid)
-values (1, '9_6952_211202');
+    values (1, '9_6952_211202');

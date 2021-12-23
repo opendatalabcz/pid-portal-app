@@ -1,10 +1,8 @@
 package cz.fit.cvut.pidbackend.Service;
 
 import cz.fit.cvut.pidbackend.Model.*;
-import cz.fit.cvut.pidbackend.Repository.RouteRepository;
-import cz.fit.cvut.pidbackend.Repository.StopRepository;
-import cz.fit.cvut.pidbackend.Repository.TripRepository;
-import cz.fit.cvut.pidbackend.Repository.TripStopsRepository;
+import cz.fit.cvut.pidbackend.Model.Dto.RouteTimeDto;
+import cz.fit.cvut.pidbackend.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +23,8 @@ public class StopService {
     private TripRepository tripRepo;
     @Autowired
     private TripStopsRepository tripStopsRepo;
+    @Autowired
+    private VehicleRepository vehicleRepo;
 
     public Set<Stop> findAll() {
         return StreamSupport.stream(stopRepo.findAll().spliterator(), false)
@@ -92,6 +92,25 @@ public class StopService {
                 continue;
             }
             routes.add(trip.get().getRoute());
+        }
+
+        return routes;
+    }
+
+    public Set<RouteTimeDto> getRoutesForStopWithTime(String stopId) {
+        Set<TripStops> tripStops = tripStopsRepo.findAllById_StopId(stopId);
+        Set<RouteTimeDto> routes = new HashSet<>();
+        for(TripStops t: tripStops) {
+            Optional<Trip> trip = tripRepo.findById(t.getId().getTripId());
+            if (trip.isEmpty()) {
+                continue;
+            }
+            Optional<Vehicle> vehicle = vehicleRepo.findById(trip.get().getRoute().getId());
+            if (vehicle.isEmpty()) {
+                continue;
+            }
+
+            routes.add(new RouteTimeDto(trip.get().getRoute(), t.getArrival(), vehicle.get().getDelay()));
         }
 
         return routes;

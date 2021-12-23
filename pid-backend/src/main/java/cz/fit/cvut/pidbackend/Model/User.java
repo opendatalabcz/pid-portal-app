@@ -1,6 +1,7 @@
 package cz.fit.cvut.pidbackend.Model;
 
 import javax.persistence.*;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -99,5 +100,19 @@ public class User {
 
     public void setFavouriteRoutes(Set<Route> favouriteRoutes) {
         this.favouriteRoutes = favouriteRoutes;
+    }
+
+    public void addFavouriteRoute(Route route) {
+        favouriteRoutes.add(route);
+    }
+    public void deleteFavouriteRoute(Route route) {
+        favouriteRoutes.remove(route);
+    }
+
+    public void addFavouriteTrip(Trip trip) {
+        favouriteTrips.add(trip);
+    }
+    public void deleteFavouriteTrip(Trip trip) {
+        favouriteTrips.remove(trip);
     }
 }
