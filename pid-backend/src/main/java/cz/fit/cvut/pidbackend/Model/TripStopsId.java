@@ -10,13 +10,16 @@ public class TripStopsId implements Serializable {
     private String tripId;
     private String stopId;
     private int index;
+    private DayOfWeek dayOfWeek;
 
     public TripStopsId() {
     }
 
-    public TripStopsId(String tripId, int ptSequence) {
+    public TripStopsId(String tripId, String stopId, int index, DayOfWeek dayOfWeek) {
         this.tripId = tripId;
-        this.index = ptSequence;
+        this.stopId = stopId;
+        this.index = index;
+        this.dayOfWeek = dayOfWeek;
     }
 
     public String getTripId() {
@@ -41,5 +44,13 @@ public class TripStopsId implements Serializable {
 
     public void setIndex(int index) {
         this.index = index;
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(DayOfWeek dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
     }
 }

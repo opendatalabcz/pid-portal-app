@@ -6,6 +6,7 @@ import cz.fit.cvut.pidbackend.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -49,15 +50,13 @@ public class StopService {
 //    }
     // is it needed?
 
-    public Set<Trip> getTripsThroughStop(String stopId) {
-        Set<TripStops> tripStops = tripStopsRepo.findAllById_StopId(stopId);
-
-
-        return null;
-
-    }
-    // TODO
-
+//    public Set<Trip> getTripsThroughStop(String stopId) {
+//        Set<TripStops> tripStops = tripStopsRepo.findAllById_StopId(stopId);
+//
+//
+//        return null;
+//
+//    }
     public Optional<Trip> getClosestTripOfRoute(String stopId, String routeId) {
         Optional<Stop> stop = stopRepo.findById(stopId);
         Set<Trip> allTrips = tripRepo.findAllByRoute_Id(routeId);
@@ -84,7 +83,9 @@ public class StopService {
     }
 
     public Set<Route> getRoutesForStop(String stopId) {
-        Set<TripStops> tripStops = tripStopsRepo.findAllById_StopId(stopId);
+        DayOfWeek today = getDayOfWeek();
+
+        Set<TripStops> tripStops = tripStopsRepo.findAllById_StopId_AndId_DayOfWeek(stopId, today);
         Set<Route> routes = new HashSet<>();
         for(TripStops t: tripStops) {
             Optional<Trip> trip = tripRepo.findById(t.getId().getTripId());
@@ -98,14 +99,16 @@ public class StopService {
     }
 
     public Set<RouteTimeDto> getRoutesForStopWithTime(String stopId) {
-        Set<TripStops> tripStops = tripStopsRepo.findAllById_StopId(stopId);
+        DayOfWeek today = getDayOfWeek();
+
+        Set<TripStops> tripStops = tripStopsRepo.findAllById_StopId_AndId_DayOfWeek(stopId, today);
         Set<RouteTimeDto> routes = new HashSet<>();
         for(TripStops t: tripStops) {
             Optional<Trip> trip = tripRepo.findById(t.getId().getTripId());
             if (trip.isEmpty()) {
                 continue;
             }
-            Optional<Vehicle> vehicle = vehicleRepo.findById(trip.get().getRoute().getId());
+            Optional<Vehicle> vehicle = vehicleRepo.findById(trip.get().getUid());
             if (vehicle.isEmpty()) {
                 continue;
             }
@@ -114,5 +117,15 @@ public class StopService {
         }
 
         return routes;
+    }
+
+    private DayOfWeek getDayOfWeek() {
+        final Calendar c = Calendar.getInstance();
+        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+        if (dayOfWeek == 1 || dayOfWeek == 7) {
+            return DayOfWeek.WEEKEND;
+        } else {
+            return DayOfWeek.WEEK_DAY;
+        }
     }
 }

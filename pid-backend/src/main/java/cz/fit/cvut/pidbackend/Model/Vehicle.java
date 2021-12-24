@@ -63,9 +63,41 @@ public class Vehicle {
     @Column(name = "scheduled_agency_name")
     private String scheduledAgencyName;
     @Column(name = "registration_number")
-    private VehicleType registrationNumber;
+    private String registrationNumber;
     @Column(name = "all_position")
     private int allPosition;
+
+    public Vehicle() {
+    }
+
+    public Vehicle(String id, Trip trip, Stop nextStop, Stop lastStop, String originRouteName, String cisLineId, int cisTripNumber, Timestamp startTimestamp, Timestamp lastModifiedTimestamp, Double lat, Double lon, int speed, Double distTraveled, boolean tracking, int bearing, int tripSequenceId, int delay, int delayLastStop, boolean isCanceled, Timestamp lastStopDeparture, Timestamp nextStopArrival, VehicleType vehicleType, String agencyName, String scheduledAgencyName, String registrationNumber, int allPosition) {
+        this.id = id;
+        this.trip = trip;
+        this.nextStop = nextStop;
+        this.lastStop = lastStop;
+        this.originRouteName = originRouteName;
+        this.cisLineId = cisLineId;
+        this.cisTripNumber = cisTripNumber;
+        this.startTimestamp = startTimestamp;
+        this.lastModifiedTimestamp = lastModifiedTimestamp;
+        this.lat = lat;
+        this.lon = lon;
+        this.speed = speed;
+        this.distTraveled = distTraveled;
+        this.tracking = tracking;
+        this.bearing = bearing;
+        this.tripSequenceId = tripSequenceId;
+        this.delay = delay;
+        this.delayLastStop = delayLastStop;
+        this.isCanceled = isCanceled;
+        this.lastStopDeparture = lastStopDeparture;
+        this.nextStopArrival = nextStopArrival;
+        this.vehicleType = vehicleType;
+        this.agencyName = agencyName;
+        this.scheduledAgencyName = scheduledAgencyName;
+        this.registrationNumber = registrationNumber;
+        this.allPosition = allPosition;
+    }
 
     public String getId() {
         return id;
@@ -259,11 +291,11 @@ public class Vehicle {
         this.scheduledAgencyName = scheduledAgencyName;
     }
 
-    public VehicleType getRegistrationNumber() {
+    public String getRegistrationNumber() {
         return registrationNumber;
     }
 
-    public void setRegistrationNumber(VehicleType registrationNumber) {
+    public void setRegistrationNumber(String registrationNumber) {
         this.registrationNumber = registrationNumber;
     }
 

@@ -7,12 +7,12 @@ import java.sql.Timestamp;
 public class RouteTimeDto {
     private Route route;
     private Timestamp expectedArrival;
-    private int delaySec;
+    private int delayMin;
 
-    public RouteTimeDto(Route route, Timestamp expectedArrival, int delaySec) {
+    public RouteTimeDto(Route route, Timestamp expectedArrival, int delayMin) {
         this.route = route;
         this.expectedArrival = expectedArrival;
-        this.delaySec = delaySec;
+        this.delayMin = delayMin;
     }
 
     public Route getRoute() {
@@ -31,11 +31,11 @@ public class RouteTimeDto {
         this.expectedArrival = expectedArrival;
     }
 
-    public int getDelaySec() {
-        return delaySec;
+    public int getDelayMin() {
+        return delayMin;
     }
 
-    public void setDelaySec(int delaySec) {
-        this.delaySec = delaySec;
+    public void setDelayMin(int delayMin) {
+        this.delayMin = delayMin;
     }
 }

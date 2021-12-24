@@ -1,6 +1,7 @@
 package cz.fit.cvut.pidbackend.Controller;
 
 import cz.fit.cvut.pidbackend.Model.*;
+import cz.fit.cvut.pidbackend.Model.Dto.TripVehicleDto;
 import cz.fit.cvut.pidbackend.Service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +39,7 @@ public class RouteController {
         return ResponseEntity.ok(routes);
     }
 
-    // get trips of given route
+    // get trips with vehicles' positions for given route
     @RequestMapping(value = "/{id}/trips", method = RequestMethod.GET)
     public ResponseEntity<Set<Trip>> getTrips(@PathVariable(value = "id") String id) {
         Set<Trip> trips = routeService.getTripsForRoute(id);
@@ -48,9 +49,19 @@ public class RouteController {
         return ResponseEntity.ok(trips);
     }
 
+    // get trips with vehicles' positions for given route
+    @RequestMapping(value = "/{id}/trips_vehicles", method = RequestMethod.GET)
+    public ResponseEntity<Set<TripVehicleDto>> getTripsWithVehicles(@PathVariable(value = "id") String id) {
+        Set<TripVehicleDto> trips = routeService.getTripsForRouteWithVehicles(id);
+        if (trips.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(trips);
+    }
+
     // get vehicles with positions for given route
-    @RequestMapping(value = "/{id}/positions", method = RequestMethod.GET)
-    public ResponseEntity<Set<Vehicle>> getPositions(@PathVariable(value = "id") String id) {
+    @RequestMapping(value = "/{id}/vehicles", method = RequestMethod.GET)
+    public ResponseEntity<Set<Vehicle>> getVehicles(@PathVariable(value = "id") String id) {
         Set<Vehicle> vehicles = routeService.getVehiclesForRoute(id);
         if (vehicles.isEmpty()) {
             return ResponseEntity.notFound().build();

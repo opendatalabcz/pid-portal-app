@@ -1,5 +1,6 @@
 package cz.fit.cvut.pidbackend.Service;
 
+import cz.fit.cvut.pidbackend.Model.Dto.TripVehicleDto;
 import cz.fit.cvut.pidbackend.Model.Position;
 import cz.fit.cvut.pidbackend.Model.Route;
 import cz.fit.cvut.pidbackend.Model.Trip;
@@ -50,5 +51,17 @@ public class RouteService {
         if (vehicles.isEmpty())
             return new HashSet<>();
         return vehicles;
+    }
+
+    public Set<TripVehicleDto> getTripsForRouteWithVehicles(String id) {
+        Set<Trip> trips = getTripsForRoute(id);
+        Set<TripVehicleDto> tripVehicles = new HashSet<>();
+        for (Trip trip : trips) {
+            Optional<Vehicle> v = vehicleRepo.findById(trip.getUid());
+            if (v.isEmpty()) continue;
+            tripVehicles.add(new TripVehicleDto(trip, v.get()));
+        }
+
+        return tripVehicles;
     }
 }
