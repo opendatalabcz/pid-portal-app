@@ -9,9 +9,10 @@ public class TripStopsId implements Serializable {
 
     private String tripId;
     private String stopId;
-    private int index;
-    private DayOfWeek dayOfWeek;
 
+    private int index;
+
+    private DayOfWeek dayOfWeek;
     public TripStopsId() {
     }
 
@@ -52,5 +53,18 @@ public class TripStopsId implements Serializable {
 
     public void setDayOfWeek(DayOfWeek dayOfWeek) {
         this.dayOfWeek = dayOfWeek;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TripStopsId that = (TripStopsId) o;
+        return index == that.index && Objects.equals(tripId, that.tripId) && Objects.equals(stopId, that.stopId) && dayOfWeek == that.dayOfWeek;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(tripId, stopId, index, dayOfWeek);
     }
 }

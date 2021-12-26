@@ -33,6 +33,9 @@ public class Route {
     @Column(name = "is_night")
     private boolean isNight;
 
+    @Column(name = "shape_id")
+    private String shapeId;
+
     public Route() {
     }
 
@@ -114,5 +117,13 @@ public class Route {
 
     public void setNight(boolean night) {
         isNight = night;
+    }
+
+    public String getShapeId() {
+        return shapeId;
+    }
+
+    public void setShapeId(String shapeId) {
+        this.shapeId = shapeId;
     }
 }

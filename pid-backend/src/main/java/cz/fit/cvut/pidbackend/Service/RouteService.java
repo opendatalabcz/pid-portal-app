@@ -1,11 +1,10 @@
 package cz.fit.cvut.pidbackend.Service;
 
+import cz.fit.cvut.pidbackend.Model.*;
+import cz.fit.cvut.pidbackend.Model.Dto.RouteShapeVehicles;
 import cz.fit.cvut.pidbackend.Model.Dto.TripVehicleDto;
-import cz.fit.cvut.pidbackend.Model.Position;
-import cz.fit.cvut.pidbackend.Model.Route;
-import cz.fit.cvut.pidbackend.Model.Trip;
-import cz.fit.cvut.pidbackend.Model.Vehicle;
 import cz.fit.cvut.pidbackend.Repository.RouteRepository;
+import cz.fit.cvut.pidbackend.Repository.ShapeRepository;
 import cz.fit.cvut.pidbackend.Repository.TripRepository;
 import cz.fit.cvut.pidbackend.Repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +18,13 @@ import java.util.Set;
 public class RouteService {
 
     @Autowired
-    RouteRepository routeRepo;
+    private RouteRepository routeRepo;
     @Autowired
-    TripRepository tripRepo;
+    private TripRepository tripRepo;
     @Autowired
-    VehicleRepository vehicleRepo;
+    private VehicleRepository vehicleRepo;
+    @Autowired
+    private ShapeRepository shapeRepo;
 
     public Optional<Route> findById(String id) {
         return routeRepo.findById(id);
@@ -63,5 +64,22 @@ public class RouteService {
         }
 
         return tripVehicles;
+    }
+
+    public Optional<RouteShapeVehicles> getByIdWithShapeAndTrips(String id) {
+        Optional<Route> route = findById(id);
+        if (route.isEmpty()) {
+            return Optional.empty();
+        }
+        Set<Shape> shape = shapeRepo.findAllByUid_Uid(route.get().getShapeId());
+        if (shape.isEmpty()) {
+            return Optional.empty();
+        }
+        Set<Vehicle> vehicles = vehicleRepo.findAllByOriginRouteName(route.get().getShortName());
+        if (vehicles.isEmpty()) {
+            return Optional.empty();
+        }
+
+        return Optional.of(new RouteShapeVehicles(route.get(), shape, vehicles));
     }
 }

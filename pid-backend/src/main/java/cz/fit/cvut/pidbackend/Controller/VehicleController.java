@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/vehicle")
@@ -27,6 +28,17 @@ public class VehicleController {
         }
         return ResponseEntity.ok(vehicle.get());
     }
+
+    @RequestMapping(value = "/route/{route_id}", method = RequestMethod.GET)
+    public ResponseEntity<Set<Vehicle>> getAllByRoute(@PathVariable(value = "route_id") String id) {
+        Set<Vehicle> vehicles = vehicleService.findAllByRoute(id);
+        if (vehicles.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(vehicles);
+    }
+
+
 
     // mb redundant
     // get position for given vehicle trip_id = vehicle_id

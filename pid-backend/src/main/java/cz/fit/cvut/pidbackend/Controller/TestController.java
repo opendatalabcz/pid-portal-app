@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping("/api/test")
 public class TestController {
@@ -19,12 +21,12 @@ public class TestController {
     ShapeRepository shapeRepository;
 
     @RequestMapping(value = "/shape/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Shape> getShape(@PathVariable(value = "id") String id) {
-        Shape shape =  shapeRepository.findAll().iterator().next();
+    public ResponseEntity<Set<Shape>> getShape(@PathVariable(value = "id") String id) {
+//        Shape shape =  shapeRepository.findAll().iterator().next();
         //return ResponseEntity.ok(shape);
         //shapeRepository.save(new Shape(new ShapeId("lol", 100), ), )
         //return ResponseEntity.ok(shapeRepository.findByUidAndPtSequence(id, 100).get());
-        return ResponseEntity.ok(shapeRepository.findByUid_Uid(id).get());
+        return ResponseEntity.ok(shapeRepository.findAllByUid_Uid(id));
 //        return ResponseEntity.ok(shape);
     }
 

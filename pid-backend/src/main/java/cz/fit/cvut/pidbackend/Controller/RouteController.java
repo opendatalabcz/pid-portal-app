@@ -1,6 +1,7 @@
 package cz.fit.cvut.pidbackend.Controller;
 
 import cz.fit.cvut.pidbackend.Model.*;
+import cz.fit.cvut.pidbackend.Model.Dto.RouteShapeVehicles;
 import cz.fit.cvut.pidbackend.Model.Dto.TripVehicleDto;
 import cz.fit.cvut.pidbackend.Service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,17 @@ public class RouteController {
         return ResponseEntity.ok(route.get());
     }
 
+    @RequestMapping(value = "/{id}/trips", method = RequestMethod.GET)
+    public ResponseEntity<RouteShapeVehicles> getByIdWithShapeAndTrips(@PathVariable(value = "id") String id) {
+        Optional<RouteShapeVehicles> route = routeService.getByIdWithShapeAndTrips(id);
+        if (route.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(route.get());
+    }
+
     // get Routes by similar Name
-    @RequestMapping(value = "/{name}", method = RequestMethod.GET)
+    @RequestMapping(value = "/search/{name}", method = RequestMethod.GET)
     public ResponseEntity<Set<Route>> getByNameLike(@PathVariable(value = "name") String nameLike) {
         Set<Route> routes = routeService.findByNameLike(nameLike);
         if (routes.isEmpty()) {
@@ -40,14 +50,14 @@ public class RouteController {
     }
 
     // get trips with vehicles' positions for given route
-    @RequestMapping(value = "/{id}/trips", method = RequestMethod.GET)
-    public ResponseEntity<Set<Trip>> getTrips(@PathVariable(value = "id") String id) {
-        Set<Trip> trips = routeService.getTripsForRoute(id);
-        if (trips.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(trips);
-    }
+//    @RequestMapping(value = "/{id}/trips", method = RequestMethod.GET)
+//    public ResponseEntity<Set<Trip>> getTrips(@PathVariable(value = "id") String id) {
+//        Set<Trip> trips = routeService.getTripsForRoute(id);
+//        if (trips.isEmpty()) {
+//            return ResponseEntity.notFound().build();
+//        }
+//        return ResponseEntity.ok(trips);
+//    }
 
     // get trips with vehicles' positions for given route
     @RequestMapping(value = "/{id}/trips_vehicles", method = RequestMethod.GET)
