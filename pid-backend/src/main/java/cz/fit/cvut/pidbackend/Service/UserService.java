@@ -35,7 +35,14 @@ public class UserService {
     }
 
     public Set<Trip> getFavouriteTrips(String id) {
-        return null;
+        Optional<User> user = userRepo.findByUsernameOrEmail(id, id);
+        if (user.isEmpty()) {
+            return new HashSet<>();
+        }
+
+        return user.get().getFavouriteTrips() != null
+                ? user.get().getFavouriteTrips()
+                : new HashSet<>();
     }
 
     public String addFavouriteRoute(String name, String routeId) {

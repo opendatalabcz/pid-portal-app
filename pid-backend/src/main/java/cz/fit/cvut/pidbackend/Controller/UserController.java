@@ -64,8 +64,8 @@ public class UserController {
 
 
     @RequestMapping(value = "/trips", method = RequestMethod.GET)
-    public ResponseEntity<Set<Trip>> getFavouriteTrips(@PathVariable(value = "id") String id) {
-        Set<Trip> fTrips = userService.getFavouriteTrips(id);
+    public ResponseEntity<Set<Trip>> getFavouriteTrips(Principal principal) {
+        Set<Trip> fTrips = userService.getFavouriteTrips(principal.getName());
         if (fTrips.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
