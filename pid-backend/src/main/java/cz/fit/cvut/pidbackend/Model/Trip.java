@@ -1,5 +1,7 @@
 package cz.fit.cvut.pidbackend.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -16,6 +18,7 @@ public class Trip {
     private Route route;
     @ManyToOne
     @JoinColumn(name = "service_id", referencedColumnName = "uid", insertable = false, updatable = false)
+    @JsonIgnore
     private Service service;
 
     @Column(name = "shape_id")

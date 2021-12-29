@@ -57,7 +57,7 @@ public class Vehicle {
     @Column(name = "next_stop_arrival")
     private Timestamp nextStopArrival;
     @Column(name = "vehicle_type")
-    private VehicleType vehicleType;
+    private String vehicleType;
     @Column(name = "agency_name")
     private String agencyName;
     @Column(name = "scheduled_agency_name")
@@ -70,7 +70,7 @@ public class Vehicle {
     public Vehicle() {
     }
 
-    public Vehicle(String id, Trip trip, Stop nextStop, Stop lastStop, String originRouteName, String cisLineId, int cisTripNumber, Timestamp startTimestamp, Timestamp lastModifiedTimestamp, Double lat, Double lon, int speed, Double distTraveled, boolean tracking, int bearing, int tripSequenceId, int delay, int delayLastStop, boolean isCanceled, Timestamp lastStopDeparture, Timestamp nextStopArrival, VehicleType vehicleType, String agencyName, String scheduledAgencyName, String registrationNumber, int allPosition) {
+    public Vehicle(String id, Trip trip, Stop nextStop, Stop lastStop, String originRouteName, String cisLineId, int cisTripNumber, Timestamp startTimestamp, Timestamp lastModifiedTimestamp, Double lat, Double lon, int speed, Double distTraveled, boolean tracking, int bearing, int tripSequenceId, int delay, int delayLastStop, boolean isCanceled, Timestamp lastStopDeparture, Timestamp nextStopArrival, String vehicleType, String agencyName, String scheduledAgencyName, String registrationNumber, int allPosition) {
         this.id = id;
         this.trip = trip;
         this.nextStop = nextStop;
@@ -267,11 +267,11 @@ public class Vehicle {
         this.nextStopArrival = nextStopArrival;
     }
 
-    public VehicleType getVehicleType() {
+    public String getVehicleType() {
         return vehicleType;
     }
 
-    public void setVehicleType(VehicleType vehicleType) {
+    public void setVehicleType(String vehicleType) {
         this.vehicleType = vehicleType;
     }
 

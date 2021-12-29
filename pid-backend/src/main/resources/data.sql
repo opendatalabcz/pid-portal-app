@@ -42,11 +42,11 @@ insert into shapes (uid, pt_sequence, lat, lon, dist_traveled)
 
 -- TripStops --
 insert into trip_stops (trip_id, stop_id, index, day_of_week, arrival)
-    values ('9_6952_211202', 'U1072Z2P', 1, 1, {ts '2012-09-17 18:47:52.69'});
+    values ('9_6952_211202', 'U1072Z2P', 1, 0, {ts '2012-09-17 18:47:52.69'});
 insert into trip_stops (trip_id, stop_id, index, day_of_week, arrival)
-    values ('9_6952_211202', 'U203Z2P', 2, 1, {ts '2012-09-17 18:47:52.69'});
+    values ('9_6952_211202', 'U203Z2P', 2, 0, {ts '2012-09-17 18:47:52.69'});
 insert into trip_stops (trip_id, stop_id, index, day_of_week, arrival)
-    values ('9_6952_211202', 'U142Z2P', 3, 1, {ts '2012-09-17 18:47:52.69'});
+    values ('9_6952_211202', 'U142Z2P', 3, 0, {ts '2012-09-17 18:47:52.69'});
 
 
 -- FavouriteRoutes --
