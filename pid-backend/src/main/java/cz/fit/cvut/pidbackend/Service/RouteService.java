@@ -1,5 +1,6 @@
 package cz.fit.cvut.pidbackend.Service;
 
+import cz.fit.cvut.pidbackend.Controller.RouteController;
 import cz.fit.cvut.pidbackend.Model.*;
 import cz.fit.cvut.pidbackend.Model.Dto.RouteShapeVehicles;
 import cz.fit.cvut.pidbackend.Model.Dto.TripVehicleDto;
@@ -7,6 +8,8 @@ import cz.fit.cvut.pidbackend.Repository.RouteRepository;
 import cz.fit.cvut.pidbackend.Repository.ShapeRepository;
 import cz.fit.cvut.pidbackend.Repository.TripRepository;
 import cz.fit.cvut.pidbackend.Repository.VehicleRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +19,7 @@ import java.util.Set;
 
 @Service
 public class RouteService {
-
+    private static final Logger logger = LogManager.getLogger(RouteService.class);
     @Autowired
     private RouteRepository routeRepo;
     @Autowired
@@ -67,6 +70,10 @@ public class RouteService {
     }
 
     public Optional<RouteShapeVehicles> getByIdWithShapeAndTrips(String id) {
+
+
+
+
         Optional<Route> route = findById(id);
         if (route.isEmpty()) {
             return Optional.empty();
@@ -83,6 +90,7 @@ public class RouteService {
         }
         Optional<Trip> trip = tripRepo.findById(vehicles.iterator().next().getId());
 
+        if (trip.isEmpty()) logger.warn("trip not found for vehicle: " + vehicles.iterator().next().getId());
         Set<Shape> shape = shapeRepo.findAllByUid_Uid(trip.get().getShapeId());
 
         return Optional.of(new RouteShapeVehicles(route.get(), shape, vehicles));
