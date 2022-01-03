@@ -1,5 +1,6 @@
 package cz.fit.cvut.pidbackend.Controller;
 
+import cz.fit.cvut.pidbackend.Model.Dto.AuthDto;
 import cz.fit.cvut.pidbackend.Model.User;
 import cz.fit.cvut.pidbackend.Repository.UserRepository;
 import cz.fit.cvut.pidbackend.Security.AuthJwt.JwtTokenProvider;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -37,7 +39,7 @@ public class AuthController {
 
 //    @PostMapping("/signin")
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
-    public ResponseEntity<JWTAuthResponse> authenticateUser(@RequestBody LoginDto loginDto){
+    public ResponseEntity<AuthDto> authenticateUser(@RequestBody LoginDto loginDto){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginDto.getUsernameOrEmail(), loginDto.getPassword()));
 
@@ -46,7 +48,10 @@ public class AuthController {
         // get token form tokenProvider
         String token = tokenProvider.generateToken(authentication);
 
-        return ResponseEntity.ok(new JWTAuthResponse(token));
+        Optional<User> user = userRepository.findByUsernameOrEmail(loginDto.getUsernameOrEmail(), loginDto.getUsernameOrEmail());
+        if (user.isEmpty()) return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(new AuthDto(new JWTAuthResponse(token), user.get()));
     }
 
 //    @PostMapping("/signup")
