@@ -1,6 +1,8 @@
 -- Users --
 insert into users (email, name, password, role, username)
     values ('email@mail.com', 'name', '$2a$10$dh2e/ujIGyCgCK0P9C9a4OvHEXwDxzk6LVFyEqH9zGeSkdk2MW0oS', 'USER', 'username');
+insert into users (email, name, password, role, username)
+    values ('gal@mail.com', 'gal', '$2a$10$dh2e/ujIGyCgCK0P9C9a4OvHEXwDxzk6LVFyEqH9zGeSkdk2MW0oS', 'USER', 'gal');
 
 -- Service --
 insert into services (uid, end_time, monday, tuesday, wednesday, thursday, friday, saturday, sunday, created_time, modified_time)
@@ -19,6 +21,8 @@ insert into stops (uid, name, lat, lon, zone_id, wheelchair, parent_station)
 -- Route --
 insert into routes (uid, long_name, short_name, desc, agency, color, text_color, type, url, is_night, shape_id)
     values ('L9', 'Sídliště Řepy - Spojovací', '9', '', '99', '7A0603', 'FFFFFF', '0', 'https://pid.cz/linka/9', false, 'L9V2');
+insert into routes (uid, long_name, short_name, desc, agency, color, text_color, type, url, is_night, shape_id)
+    values ('L10', 'Sídliště Řepy - Spojovací', '10', '', '99', '7A0603', 'FFFFFF', '0', 'https://pid.cz/linka/9', false, 'L9V2');
 
 
 
@@ -50,9 +54,11 @@ insert into trip_stops (trip_id, stop_id, index, day_of_week, arrival)
 
 
 -- FavouriteRoutes --
-insert into users_favourite_routes (user_id, favourite_routes_uid)
+insert into users_favourite_routes (user_id, route_id)
     values (1, 'L9');
+insert into users_favourite_routes (user_id, route_id)
+    values (1, 'L10');
 
 -- FavouriteTrips --
-insert into users_favourite_trips (user_id, favourite_trips_uid)
+insert into users_favourite_trips (user_id, trip_id)
     values (1, '9_6952_211202');

@@ -25,13 +25,14 @@ public class User {
     @Column(name = "role")
     private String role;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JoinColumn(name = "favourite_trips")
-//    @OneToMany(mappedBy = "users")
+    @ManyToMany(cascade={CascadeType.ALL})
+    @JoinTable(name="users_favourite_trips", joinColumns=@JoinColumn(name="user_id"),
+        inverseJoinColumns=@JoinColumn(name="trip_id"))//@JoinTable is used to map Join table in database
     private Set<Trip> favouriteTrips;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JoinColumn(name = "favourite_routes")
-//    @OneToMany(mappedBy = "users")
+
+    @ManyToMany(cascade={CascadeType.ALL})
+    @JoinTable(name="users_favourite_routes", joinColumns=@JoinColumn(name="user_id"),
+        inverseJoinColumns=@JoinColumn(name="route_id"))//@JoinTable is used to map Join table in database
     private Set<Route> favouriteRoutes;
 
     public Long getId() {
