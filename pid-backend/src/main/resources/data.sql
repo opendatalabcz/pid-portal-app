@@ -98,8 +98,8 @@ insert into users_favourite_routes (user_id, route_id)
     values (1, 'L10');
 
 -- FavouriteTrips --
--- insert into users_favourite_trips (user_id, trip_id)
---     values (1, '9_6952_211202');
+insert into users_favourite_trips (user_id, trip_id)
+    values (1, '9_6952_211202');
 
 
 insert into delay (trip_id, stop_id, d_date, delay_min)

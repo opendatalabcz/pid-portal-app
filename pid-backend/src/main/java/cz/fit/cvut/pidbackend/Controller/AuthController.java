@@ -1,6 +1,7 @@
 package cz.fit.cvut.pidbackend.Controller;
 
 import cz.fit.cvut.pidbackend.Model.Dto.AuthDto;
+import cz.fit.cvut.pidbackend.Model.Dto.UserDto;
 import cz.fit.cvut.pidbackend.Model.User;
 import cz.fit.cvut.pidbackend.Repository.UserRepository;
 import cz.fit.cvut.pidbackend.Security.AuthJwt.JwtTokenProvider;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -82,7 +84,8 @@ public class AuthController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<User>> findAll() {
-        return ResponseEntity.ok(userRepository.findAll());
+    public ResponseEntity<List<UserDto>> findAll() {
+
+        return ResponseEntity.ok(userRepository.findAll().stream().map(UserDto::new).collect(Collectors.toList()));
     }
 }
