@@ -2,6 +2,7 @@ package cz.fit.cvut.pidbackend.Model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 @Entity
@@ -12,12 +13,12 @@ public class TripStops implements Serializable {
     private TripStopsId id;
 
     @Column(name = "arrival")
-    private Timestamp arrival;
+    private Time arrival;
 
     public TripStops() {
     }
 
-    public TripStops(TripStopsId id, Timestamp arrival) {
+    public TripStops(TripStopsId id, Time arrival) {
         this.id = id;
         this.arrival = arrival;
     }
@@ -30,11 +31,11 @@ public class TripStops implements Serializable {
         this.id = id;
     }
 
-    public Timestamp getArrival() {
+    public Time getArrival() {
         return arrival;
     }
 
-    public void setArrival(Timestamp arrival) {
+    public void setArrival(Time arrival) {
         this.arrival = arrival;
     }
 }

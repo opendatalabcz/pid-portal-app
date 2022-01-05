@@ -2,14 +2,15 @@ package cz.fit.cvut.pidbackend.Model.Dto;
 
 import cz.fit.cvut.pidbackend.Model.Route;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 
 public class RouteTimeDto {
     private Route route;
-    private Timestamp expectedArrival;
+    private Time expectedArrival;
     private int delayMin;
 
-    public RouteTimeDto(Route route, Timestamp expectedArrival, int delayMin) {
+    public RouteTimeDto(Route route, Time expectedArrival, int delayMin) {
         this.route = route;
         this.expectedArrival = expectedArrival;
         this.delayMin = delayMin;
@@ -23,11 +24,11 @@ public class RouteTimeDto {
         this.route = route;
     }
 
-    public Timestamp getExpectedArrival() {
+    public Time getExpectedArrival() {
         return expectedArrival;
     }
 
-    public void setExpectedArrival(Timestamp expectedArrival) {
+    public void setExpectedArrival(Time expectedArrival) {
         this.expectedArrival = expectedArrival;
     }
 

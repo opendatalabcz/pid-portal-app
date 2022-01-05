@@ -5,11 +5,11 @@ import cz.fit.cvut.pidbackend.Security.Dto.JWTAuthResponse;
 
 public class AuthDto {
     private JWTAuthResponse jwtAuthResponse;
-    private User user;
+    private UserDto user;
 
     public AuthDto(JWTAuthResponse jwtAuthResponse, User user) {
         this.jwtAuthResponse = jwtAuthResponse;
-        this.user = user;
+        this.user = new UserDto(user);
     }
 
     public JWTAuthResponse getJwtAuthResponse() {
@@ -20,11 +20,11 @@ public class AuthDto {
         this.jwtAuthResponse = jwtAuthResponse;
     }
 
-    public User getUser() {
+    public UserDto getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDto user) {
         this.user = user;
     }
 }

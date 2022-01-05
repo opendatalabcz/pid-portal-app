@@ -2,6 +2,7 @@ package cz.fit.cvut.pidbackend.Controller;
 
 import cz.fit.cvut.pidbackend.Model.*;
 import cz.fit.cvut.pidbackend.Model.Dto.RouteTimeDto;
+import cz.fit.cvut.pidbackend.Model.Dto.TripVehicleDto;
 import cz.fit.cvut.pidbackend.Service.StopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -70,10 +71,9 @@ public class StopController {
 
     // get closest trip to a given stop
     @RequestMapping(value = "/{stopId}/{routeId}", method = RequestMethod.GET)
-    public ResponseEntity<Trip> getClosestTrip(@PathVariable(value = "stopId") String stopId,
+    public ResponseEntity<TripVehicleDto> getClosestTrip(@PathVariable(value = "stopId") String stopId,
                                                @PathVariable(value = "routeId") String routeId) {
-
-        Optional<Trip> trip = stopService.getClosestTripOfRoute(stopId, routeId);
+        Optional<TripVehicleDto> trip = stopService.getClosestTripOfRoute(stopId, routeId);
         if (trip.isEmpty()) {
             return ResponseEntity.notFound().build();
         }

@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "trips")
-public class Trip {
+public class    Trip {
 
     @Id
     @Column(name = "uid")

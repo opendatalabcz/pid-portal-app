@@ -2,10 +2,13 @@ package cz.fit.cvut.pidbackend.Service;
 
 import cz.fit.cvut.pidbackend.Model.*;
 import cz.fit.cvut.pidbackend.Model.Dto.RouteTimeDto;
+import cz.fit.cvut.pidbackend.Model.Dto.TripVehicleDto;
 import cz.fit.cvut.pidbackend.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Optional;
@@ -57,29 +60,97 @@ public class StopService {
 //        return null;
 //
 //    }
-    public Optional<Trip> getClosestTripOfRoute(String stopId, String routeId) {
+    public Optional<TripVehicleDto> getClosestTripOfRoute(String stopId, String routeId) {
         Optional<Stop> stop = stopRepo.findById(stopId);
+        if (stop.isEmpty())
+            return Optional.empty();
+
         Set<Trip> allTrips = tripRepo.findAllByRoute_Id(routeId);
-//        Set<Trip> tripsThroughStop = filterByStop(allTrips, stop);
+        Set<Trip> tripsThroughStop = filterByStop(allTrips, stop.get());
+        if (tripsThroughStop.isEmpty())
+            return Optional.empty();
+
         Trip closestTrip = null;
         int shortestTimeMin = -1;
-//        for(Trip t : tripsThroughStop) {
-//            if (isPassedStop(t, stop)) {
-//                if (closestTrip == null) {
-//                    closestTrip = t;
-//                    shortestTimeMin = calcTimeToStop(t, stop);
-//                    continue;
-//                }
-//                int tmpTime = calcTimeToStop(t, stop);
-//                if (shortestTimeMin > tmpTime) {
-//                    closestTrip = t;
-//                    shortestTimeMin = tmpTime;
-//                }
-//            }
-//        }
+        for(Trip t : tripsThroughStop) {
+            if (!isPassedStop(t, stop.get())) {
+                if (closestTrip == null) {
+                    shortestTimeMin = calcTimeToStop(t, stop.get());
+                    if (shortestTimeMin != -1)
+                        closestTrip = t;
+                    continue;
+                }
+                int tmpTime = calcTimeToStop(t, stop.get());
+                if (tmpTime == -1)
+                    continue;
+
+                if (shortestTimeMin > tmpTime) {
+                    closestTrip = t;
+                    shortestTimeMin = tmpTime;
+                }
+            }
+        }
         if (closestTrip == null)
             return Optional.empty();
-        return Optional.of(closestTrip);
+        Optional<Vehicle> vehicle = vehicleRepo.findById(closestTrip.getUid());
+        if (vehicle.isEmpty()) {
+            return Optional.empty();
+        }
+
+        return Optional.of(new TripVehicleDto(closestTrip, vehicle.get()));
+    }
+
+    private int calcTimeToStop(Trip t, Stop stop) {
+        Optional<Vehicle> vehicle = vehicleRepo.findById(t.getUid());
+        if (vehicle.isEmpty())
+            return -1;
+
+        Optional<TripStops> tripStops = tripStopsRepo.findById_TripIdAndId_StopIdAndId_DayOfWeek(t.getUid(), stop.getId(), getDayOfWeek());
+        if (tripStops.isEmpty())
+            return -1;
+
+        LocalDateTime now = LocalDateTime.now();
+
+        return tripStops.get().getArrival().toLocalTime().minusHours(now.getHour()).minusMinutes(now.getMinute()).getMinute();
+    }
+
+    private boolean isPassedStop(Trip t, Stop stop) {
+        Optional<Vehicle> vehicle = vehicleRepo.findById(t.getUid());
+        if (vehicle.isEmpty())
+            return true;
+
+        Stop nextStop = vehicle.get().getNextStop();
+        if (nextStop == null)
+            return true;
+
+        Set<TripStops> tripStops = tripStopsRepo.findById_TripIdAndId_DayOfWeek(t.getUid(), getDayOfWeek());
+        if (tripStops.isEmpty())
+            return true;
+
+        int stopIndex = -1;
+        int currStopIndex = -1;
+        for (TripStops ts: tripStops) {
+            if (ts.getId().getStopId().equals(stop.getId()))
+                stopIndex = ts.getId().getIndex();
+            if (ts.getId().getStopId().equals(nextStop.getId()))
+                currStopIndex = ts.getId().getIndex();
+        }
+
+        if (stopIndex == -1 || currStopIndex == -1)
+            return true;
+
+        return currStopIndex <= stopIndex;
+    }
+
+    private Set<Trip> filterByStop(Set<Trip> allTrips, Stop stop) {
+        Set<TripStops> tripStopsThroughStop = tripStopsRepo.findAllById_StopId(stop.getId());
+        Set<String> tripsIds = tripStopsThroughStop.stream().map(tripStops -> tripStops.getId().getTripId()).collect(Collectors.toSet());
+        Set<Trip> tripThroughStop = new HashSet<>();
+        for (Trip trip : allTrips) {
+            if (tripsIds.contains(trip.getUid()))
+                tripThroughStop.add(trip);
+        }
+        return tripThroughStop;
     }
 
     public Set<Route> getRoutesForStop(String stopId) {
