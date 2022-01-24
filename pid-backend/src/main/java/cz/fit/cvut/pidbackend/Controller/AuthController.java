@@ -39,7 +39,6 @@ public class AuthController {
     @Autowired
     private JwtTokenProvider tokenProvider;
 
-//    @PostMapping("/signin")
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
     public ResponseEntity<AuthDto> authenticateUser(@RequestBody LoginDto loginDto){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -53,10 +52,9 @@ public class AuthController {
         Optional<User> user = userRepository.findByUsernameOrEmail(loginDto.getUsernameOrEmail(), loginDto.getUsernameOrEmail());
         if (user.isEmpty()) return ResponseEntity.notFound().build();
 
-        return ResponseEntity.ok(new AuthDto(new JWTAuthResponse(token), user.get()));
+        return ResponseEntity.ok(new AuthDto(new JWTAuthResponse(token), new UserDto(user.get())));
     }
 
-//    @PostMapping("/signup")
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ResponseEntity<?> registerUser(@RequestBody SignUpDto signUpDto){
 
@@ -85,7 +83,6 @@ public class AuthController {
 
     @GetMapping("/list")
     public ResponseEntity<List<UserDto>> findAll() {
-
         return ResponseEntity.ok(userRepository.findAll().stream().map(UserDto::new).collect(Collectors.toList()));
     }
 }

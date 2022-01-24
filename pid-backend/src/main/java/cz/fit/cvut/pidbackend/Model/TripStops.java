@@ -1,5 +1,10 @@
 package cz.fit.cvut.pidbackend.Model;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Time;
@@ -7,6 +12,9 @@ import java.sql.Timestamp;
 
 @Entity
 @Table
+@Data
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class TripStops implements Serializable {
 
     @EmbeddedId
@@ -14,28 +22,4 @@ public class TripStops implements Serializable {
 
     @Column(name = "arrival")
     private Time arrival;
-
-    public TripStops() {
-    }
-
-    public TripStops(TripStopsId id, Time arrival) {
-        this.id = id;
-        this.arrival = arrival;
-    }
-
-    public TripStopsId getId() {
-        return id;
-    }
-
-    public void setId(TripStopsId id) {
-        this.id = id;
-    }
-
-    public Time getArrival() {
-        return arrival;
-    }
-
-    public void setArrival(Time arrival) {
-        this.arrival = arrival;
-    }
 }
