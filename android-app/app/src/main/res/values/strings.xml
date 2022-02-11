@@ -1,7 +1,45 @@
 <resources>
-    <string name="app_name">PID Application</string>
-    <string name="mapbox_access_token">pk.eyJ1IjoiZG9zbWFnYWwiLCJhIjoiY2ttZGR1NW9qMmtlMTJ5bjZmMzg0dzgydCJ9.vURnTNgsjxJbvFOZcwRAxQ</string>
-    <string name="user_location_permission_explanation">The application need to use your location.</string>
-    <string name="user_location_permission_not_granted">User location permissions are not granted. Please, grant them to use the application.</string>
-    <string name="btn_draw_route">Draw a route</string>
+
+    <string name="app_name">PID-MobApp</string>
+
+    <string name="title_activity_maps">Map</string>
+    <string name="search">Search</string>
+    <string name="menu">Menu</string>
+    <string name="like">Like</string>
+    <string name="to">To</string>
+    <string name="from">From</string>
+    <string name="direction">Direction</string>
+    <string name="next_bus_arrival">Next arrival at</string>
+    <string name="next_in">Next at</string>
+    <string name="routes">Routes</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="auth">Authorization</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="current_delay">Current Delay</string>
+    <string name="delay">Delay</string>
+    <string name="aver">Average Delay</string>
+    <string name="route_name">Route name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_user_name_or_email">Username or Email</string>
+    <string name="hint_password">Password</string>
+    <string name="login">Login</string>
+    <string name="go_to_register">Go to Register</string>
+    <string name="hint_name">Name</string>
+    <string name="register">Register</string>
+    <string name="btn_link_to_login">Already registred? Login</string>
+    <string name="login_error">Login error</string>
+    <string name="favourites">Favourites</string>
+    <string name="hint_user_name">User name</string>
+    <string name="logout">Log out</string>
+    <string name="favourite_routes">Favourite routes</string>
+    <string name="favourite_trips">Favourite trips</string>
 </resources>
