@@ -56,16 +56,6 @@ public class RouteController {
     }
 
     // get trips with vehicles' positions for given route
-//    @RequestMapping(value = "/{id}/trips", method = RequestMethod.GET)
-//    public ResponseEntity<Set<Trip>> getTrips(@PathVariable(value = "id") String id) {
-//        Set<Trip> trips = routeService.getTripsForRoute(id);
-//        if (trips.isEmpty()) {
-//            return ResponseEntity.notFound().build();
-//        }
-//        return ResponseEntity.ok(trips);
-//    }
-
-    // get trips with vehicles' positions for given route
     @RequestMapping(value = "/{id}/trips_vehicles", method = RequestMethod.GET)
     public ResponseEntity<Set<TripVehicleDto>> getTripsWithVehicles(@PathVariable(value = "id") String id) {
         Set<TripVehicleDto> trips = routeService.getTripsForRouteWithVehicles(id);

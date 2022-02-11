@@ -9,10 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -29,6 +26,8 @@ public class StopService {
     private TripStopsRepository tripStopsRepo;
     @Autowired
     private VehicleRepository vehicleRepo;
+    @Autowired
+    private ShapeRepository shapeRepo;
 
     public Set<Stop> findAll() {
         return StreamSupport.stream(stopRepo.findAll().spliterator(), false)
@@ -97,7 +96,9 @@ public class StopService {
             return Optional.empty();
         }
 
-        return Optional.of(new TripVehicleDto(closestTrip, vehicle.get()));
+        Set<Shape> shapes = shapeRepo.findAllByUid_Uid(closestTrip.getShapeId());
+
+        return Optional.of(new TripVehicleDto(closestTrip, vehicle.get(), shapes));
     }
 
     private int calcTimeToStop(Trip t, Stop stop) {

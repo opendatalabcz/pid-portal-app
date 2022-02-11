@@ -16,17 +16,9 @@ import java.util.Set;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
+
     @Autowired
     private UserService userService;
-
-//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-//    public ResponseEntity<Set<Route>> getFavouriteRoutes(@PathVariable(value = "id") String id) {
-//        Set<Route> fRoutes = userService.getFavouriteRoutes(id);
-//        if (fRoutes.isEmpty()) {
-//            return ResponseEntity.notFound().build();
-//        }
-//        return ResponseEntity.ok(fRoutes);
-//    }
 
     @RequestMapping(value = "/routes", method = RequestMethod.GET)
 //    @PreAuthorize()

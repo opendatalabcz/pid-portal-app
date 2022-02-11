@@ -34,7 +34,7 @@ public class User {
     @Column(name = "role")
     private String role;
 
-    @ManyToMany(cascade={CascadeType.ALL})
+    @ManyToMany(cascade={CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(name="users_favourite_trips",
             joinColumns=@JoinColumn(name="user_id"),
             inverseJoinColumns=@JoinColumn(name="trip_id"))

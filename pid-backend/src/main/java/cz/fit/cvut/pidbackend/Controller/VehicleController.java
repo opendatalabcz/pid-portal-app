@@ -37,17 +37,4 @@ public class VehicleController {
         }
         return ResponseEntity.ok(vehicles);
     }
-
-
-
-    // mb redundant
-    // get position for given vehicle trip_id = vehicle_id
-//    @RequestMapping(value = "/{id}/position", method = RequestMethod.GET)
-//    public ResponseEntity<Position> getPosition(@PathVariable(value = "id") String id) {
-//        Optional<Position> position = vehicleService.getPosition(id);
-//        if (position.isEmpty()) {
-//            return ResponseEntity.notFound().build();
-//        }
-//        return ResponseEntity.ok(position.get());
-//    }
 }

@@ -19,6 +19,7 @@ import java.util.Set;
 
 @Service
 public class RouteService {
+
     private static final Logger logger = LogManager.getLogger(RouteService.class);
     @Autowired
     private RouteRepository routeRepo;
@@ -63,7 +64,7 @@ public class RouteService {
         for (Trip trip : trips) {
             Optional<Vehicle> v = vehicleRepo.findById(trip.getUid());
             if (v.isEmpty()) continue;
-            tripVehicles.add(new TripVehicleDto(trip, v.get()));
+            tripVehicles.add(new TripVehicleDto(trip, v.get(), null));
         }
 
         return tripVehicles;
@@ -95,4 +96,6 @@ public class RouteService {
 
         return Optional.of(new RouteShapeVehicles(route.get(), shape, vehicles));
     }
+
+
 }

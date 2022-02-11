@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Objects;
+import java.sql.Date;
 
 @Embeddable
 @Data
@@ -18,5 +17,5 @@ public class DelayId implements Serializable {
 
     private String tripId;
     private String stopId;
-    private Date dDate;
+    private Date dateD;
 }

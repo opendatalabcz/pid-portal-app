@@ -18,6 +18,7 @@ public class UserDto {
     private String password;
     private String role;
     private Set<TripDto> favouriteTrips;
+//    private Set<Trip> favouriteTrips;
     private Set<Route> favouriteRoutes;
 
     public UserDto(User user) {
@@ -30,6 +31,7 @@ public class UserDto {
         this.favouriteTrips = user.getFavouriteTrips() == null
                 ? new HashSet<>()
                 : user.getFavouriteTrips().stream().map(TripDto::new).collect(Collectors.toSet());
+//        this.favouriteTrips = user.getFavouriteTrips();
         this.favouriteRoutes = user.getFavouriteRoutes();
     }
 }

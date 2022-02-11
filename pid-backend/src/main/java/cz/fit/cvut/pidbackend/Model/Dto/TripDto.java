@@ -8,6 +8,7 @@ public class TripDto {
     private String uid;
     private String routeId;
     private String shapeId;
+    private String serviceId;
     private int direction;
     private int exceptional;
     private String headsign;
@@ -19,6 +20,7 @@ public class TripDto {
         this.uid = trip.getUid();
         this.routeId = trip.getRoute().getId();
         this.shapeId = trip.getShapeId();
+        this.serviceId = trip.getService().getUid();
         this.direction = trip.getDirection();
         this.exceptional = trip.getExceptional();
         this.headsign = trip.getHeadsign();

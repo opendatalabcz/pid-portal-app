@@ -1,9 +1,9 @@
 package cz.fit.cvut.pidbackend.Controller;
 
 import cz.fit.cvut.pidbackend.Model.*;
-import cz.fit.cvut.pidbackend.Model.Dto.RouteTimeDto;
-import cz.fit.cvut.pidbackend.Model.Dto.TripVehicleDto;
+import cz.fit.cvut.pidbackend.Model.Dto.*;
 import cz.fit.cvut.pidbackend.Service.StopService;
+import cz.fit.cvut.pidbackend.Service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,8 +20,10 @@ public class StopController {
 
     @Autowired
     StopService stopService;
+    @Autowired
+    TripService tripService;
 
-    // get Stop by its ID
+    // get all Stops
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<Set<Stop>> getAll() {
         Set<Stop> stop = stopService.findAll();
@@ -71,21 +73,22 @@ public class StopController {
 
     // get closest trip to a given stop
     @RequestMapping(value = "/{stopId}/{routeId}", method = RequestMethod.GET)
-    public ResponseEntity<TripVehicleDto> getClosestTrip(@PathVariable(value = "stopId") String stopId,
-                                               @PathVariable(value = "routeId") String routeId) {
-        Optional<TripVehicleDto> trip = stopService.getClosestTripOfRoute(stopId, routeId);
-        if (trip.isEmpty()) {
+    public ResponseEntity<TripResponse> getClosestTrip(@PathVariable(value = "stopId") String stopId,
+                                                       @PathVariable(value = "routeId") String routeId) {
+        Optional<TripVehicleDto> closestTrip = stopService.getClosestTripOfRoute(stopId, routeId);
+        if (closestTrip.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(trip.get());
-    }
+        TripDelayDto tripDelays = tripService.findByIdWithDelays(closestTrip.get().getTrip().getUid(), stopId);
+        if (tripDelays == null) {
+            return ResponseEntity.notFound().build();
+        }
 
-    //mb redundant
-    // get Stops in given area restricted by 2 points
-//    @RequestMapping(value = "/{p1}/{p2}", method = RequestMethod.GET)
-//    public ResponseEntity<Set<Stop>> getInArea(@PathVariable(value = "p1") Point p1,
-//                                               @PathVariable(value = "p2") Point p2) {
-//        Set<Stop> stops = stopService.getStopsInArea(p1, p2);
-//        return ResponseEntity.ok(stops);
-//    }
+        return ResponseEntity.ok(
+                new TripResponse(
+                        new TripDto(closestTrip.get().getTrip()),
+                        closestTrip.get().getVehicle(),
+                        closestTrip.get().getShapes(),
+                        tripDelays.getDelays()));
+    }
 }

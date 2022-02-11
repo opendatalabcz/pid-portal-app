@@ -20,6 +20,7 @@ public class TripStops implements Serializable {
     @EmbeddedId
     private TripStopsId id;
 
+
     @Column(name = "arrival")
     private Time arrival;
 }
