@@ -9,8 +9,6 @@ import java.util.Set;
 
 @Repository
 public interface VehicleRepository extends CrudRepository<Vehicle, String> {
-    // find current
     Set<Vehicle> findAllByTripAndTrackingIsTrue(Trip t);
     Set<Vehicle> findAllByOriginRouteName(String routeName);
-
 }

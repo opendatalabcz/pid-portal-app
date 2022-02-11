@@ -9,5 +9,4 @@ import java.util.Set;
 @Repository
 public interface TripRepository extends CrudRepository<Trip, String> {
     Set<Trip> findAllByRoute_Id(String routeId);
-    //Set<Trip> findAllBy(String routeId);
 }

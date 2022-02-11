@@ -10,6 +10,5 @@ import java.util.Set;
 
 @Repository
 public interface ShapeRepository extends CrudRepository<Shape, ShapeId> {
-    //Optional<Shape> findByUidAndPtSequence(String uid, int ptSequence);
     Set<Shape> findAllByUid_Uid(String uid);
 }

@@ -9,12 +9,4 @@ import java.util.Set;
 @Repository
 public interface StopRepository extends CrudRepository<Stop, String> {
     Set<Stop> findStopByNameIsLike(String name);
-
-    // select * as s
-    // from stop
-    // where s.lat >= p1.lat
-    // and s.lng >= p1.lng
-    // and s.lat <= p2.lat
-    // and s.lng >= p2.lng
-    //Set<Stop> findStopsByPosition(Point p1, Point p2);
 }

@@ -71,20 +71,10 @@ public class RouteService {
     }
 
     public Optional<RouteShapeVehicles> getByIdWithShapeAndTrips(String id) {
-
-
-
-
         Optional<Route> route = findById(id);
         if (route.isEmpty()) {
             return Optional.empty();
         }
-//        Set<Shape> shape = shapeRepo.findAllByUid_Uid(route.get().getShapeId());
-//        if (shape.isEmpty()) {
-//            shape.add(new Shape(new ShapeId("L9V2", 100000), 50.08377, 14.42812, 11.17199));
-//            shape.add(new Shape(new ShapeId("L9V2", 100001), 50.08434, 14.42896, 11.25945));
-////            return Optional.empty();
-//        }
         Set<Vehicle> vehicles = vehicleRepo.findAllByOriginRouteName(route.get().getShortName());
         if (vehicles.isEmpty()) {
             return Optional.empty();
@@ -96,6 +86,4 @@ public class RouteService {
 
         return Optional.of(new RouteShapeVehicles(route.get(), shape, vehicles));
     }
-
-
 }

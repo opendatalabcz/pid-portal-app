@@ -19,8 +19,6 @@ public class StopService {
     @Autowired
     private StopRepository stopRepo;
     @Autowired
-    private RouteRepository routeRepo;
-    @Autowired
     private TripRepository tripRepo;
     @Autowired
     private TripStopsRepository tripStopsRepo;
@@ -42,23 +40,7 @@ public class StopService {
         return  StreamSupport.stream(stopRepo.findStopByNameIsLike(nameLike).spliterator(), false)
                 .collect(Collectors.toSet());
     }
-//    public Set<Stop> getStopsInArea(Point p1, Point p2) {
-////        return stopRepo.findStopsByPosition(p1, p2);
-////        return stopRepo.findAll().iterator();
-//        return StreamSupport.stream(stopRepo.findAll().spliterator(), false)
-//                .collect(Collectors
-//                        .toSet());
 
-//    }
-    // is it needed?
-
-//    public Set<Trip> getTripsThroughStop(String stopId) {
-//        Set<TripStops> tripStops = tripStopsRepo.findAllById_StopId(stopId);
-//
-//
-//        return null;
-//
-//    }
     public Optional<TripVehicleDto> getClosestTripOfRoute(String stopId, String routeId) {
         Optional<Stop> stop = stopRepo.findById(stopId);
         if (stop.isEmpty())
@@ -71,7 +53,7 @@ public class StopService {
 
         Trip closestTrip = null;
         int shortestTimeMin = -1;
-        for(Trip t : tripsThroughStop) {
+        for (Trip t : tripsThroughStop) {
             if (!isPassedStop(t, stop.get())) {
                 if (closestTrip == null) {
                     shortestTimeMin = calcTimeToStop(t, stop.get());
